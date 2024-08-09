@@ -54,7 +54,7 @@ def main():
 
         log(
             "info",
-            f"Location was sampled: {ageCheck(location['refresh_time_unix'], location['refresh_rate'])}",
+            f"Location ({location['location_name']}: {location['location_id']}) was sampled: {ageCheck(location['refresh_time_unix'], location['refresh_rate'])}",
         )
 
 
