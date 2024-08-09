@@ -52,7 +52,7 @@ def main():
             # Optionally, update the location timestamp
             mongo_handler.updateLastRefeshTime(location["location_id"])
 
-        log("info", f"Location was sampled: {ageCheck(location["refresh_time_unix"], location["refresh_rate"])}")
+        log("info", f"Location was sampled: {ageCheck(location['refresh_time_unix'], location["refresh_rate"])}")
 
 
 if __name__ == "__main__":
