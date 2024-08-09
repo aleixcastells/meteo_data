@@ -80,8 +80,8 @@ class OpenMeteo:
 
         time_intervals = [(0, "T_0")]
 
-        # Generate intervals every 6 hours up to 72 hours ago
-        for i in range(6, 73, 6):
+        # Generate intervals every hour up to 72 hours ago
+        for i in range(1, 73, 1):
             time_intervals.append((i, f"T_{i}"))
 
         # The last entry in the hourly list is assumed to be the most recent (current hour)
