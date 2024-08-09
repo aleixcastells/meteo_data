@@ -1,29 +1,5 @@
 # openmeteo.py
 
-# Here we use the OpenMeteo class to filter and process the response from fetchApi.
-# We conform the data to our sample standards and prepare it for submission to the database.
-
-# {
-#     "location_id": 1000000,
-#     "fetched_spanish_time": string (UTC Spain (CET/CEST): 2024-08-09T00:00) 2024-08-08T20:42:13.610837+02:00",
-#     "fetched_unix_time": int 1723142534,
-#     "T_0": {
-#         "sample_time": string (UTC Spain (CET/CEST): 2024-08-09T00:00),
-#         "wave_direction": int (0-359),
-#         "wind_wave_direction": int (0-359),
-#         "swell_wave_direction": int (0-359),
-#         "ocean_current_direction": int (0-359),
-#         "ocean_current_velocity": float (m/s),
-#         "air_temperature": float
-#         "air_humidity": int (0-100)
-#         "cloud_cover": int
-#         "wind_speed": float (m/s),
-#         "uv_index": float
-#         "is_day": false
-#     },
-# ...
-
-
 import json
 import time
 import pytz
@@ -78,9 +54,11 @@ class OpenMeteo:
             },
         }
 
+        # Generate intervals every hour up to 72 hours ago
+
         time_intervals = [(0, "T_0")]
 
-        # Generate intervals every hour up to 72 hours ago
+        # To modify intervals change the first and last values in range(1,2,1) equally.
         for i in range(1, 73, 1):
             time_intervals.append((i, f"T_{i}"))
 

@@ -1,3 +1,5 @@
+# main.py
+
 import os
 from dotenv import load_dotenv
 from data_handler.mongodb import mongoHandler
@@ -46,10 +48,10 @@ def main():
                 location["currents_longitude"],
             ).fetch_weather()
 
-            # Optionally, store the weather data in MongoDB
+            # Store the weather data in MongoDB
             mongo_handler.store_processed_data(new_sample)
 
-            # Optionally, update the location timestamp
+            # Update the location timestamp
             mongo_handler.updateLastRefeshTime(location["location_id"])
 
         log(

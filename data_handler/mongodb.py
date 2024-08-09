@@ -7,7 +7,6 @@ from helpers.logger import log
 from datetime import datetime
 
 import time
-import pytz
 from data_handler.fetch_api import fetchApi
 
 
