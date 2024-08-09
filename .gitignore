@@ -4,3 +4,4 @@
 .env
 *.sqlite
 *.pyc
+.log
