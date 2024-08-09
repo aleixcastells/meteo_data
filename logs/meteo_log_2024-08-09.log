@@ -1,0 +1,54 @@
+2024-08-09 10:40:10 - root - INFO - --------------------------
+2024-08-09 10:40:11 - root - INFO - MongoDB connection established successfully.
+2024-08-09 10:40:11 - root - INFO - Using database: meteo_data
+2024-08-09 10:40:11 - root - INFO - Using collection: locations
+2024-08-09 10:40:11 - root - INFO - Found 2 locations.
+2024-08-09 10:40:11 - root - INFO - ---
+2024-08-09 10:40:11 - root - INFO - Fetching data for location: Cala Estreta
+2024-08-09 10:40:11 - root - INFO - Cala Estreta => Lat: 39.754595185318855, Lon: 3.412146318804192
+2024-08-09 10:40:11 - root - INFO - Fetched URL
+2024-08-09 10:40:12 - root - INFO - Fetched URL
+2024-08-09 10:40:12 - root - INFO - Fetched URL
+2024-08-09 10:40:12 - root - INFO - Sample retrieved from API
+2024-08-09 10:40:12 - root - INFO - Sample processed and cleaned
+2024-08-09 10:40:12 - root - INFO - Sample uploaded to database
+2024-08-09 10:40:12 - root - INFO - Location last refresh time updated
+2024-08-09 10:40:12 - root - INFO - True
+2024-08-09 10:40:12 - root - INFO - ---
+2024-08-09 10:40:12 - root - INFO - Fetching data for location: Es Trenc
+2024-08-09 10:40:12 - root - INFO - Es Trenc => Lat: 39.34600987342693, Lon: 2.982990473995135
+2024-08-09 10:40:12 - root - INFO - Fetched URL
+2024-08-09 10:40:12 - root - INFO - Fetched URL
+2024-08-09 10:40:12 - root - INFO - Fetched URL
+2024-08-09 10:40:12 - root - INFO - Sample retrieved from API
+2024-08-09 10:40:12 - root - INFO - Sample processed and cleaned
+2024-08-09 10:40:12 - root - INFO - Sample uploaded to database
+2024-08-09 10:40:12 - root - INFO - Location last refresh time updated
+2024-08-09 10:40:12 - root - INFO - True
+2024-08-09 10:42:09 - root - INFO - --------------------------
+2024-08-09 10:42:10 - root - INFO - MongoDB connection established successfully.
+2024-08-09 10:42:10 - root - INFO - Using database: meteo_data
+2024-08-09 10:42:10 - root - INFO - Using collection: locations
+2024-08-09 10:42:10 - root - INFO - Found 2 locations.
+2024-08-09 10:42:10 - root - INFO - ---
+2024-08-09 10:42:10 - root - INFO - Fetching data for location: Cala Estreta
+2024-08-09 10:42:10 - root - INFO - Cala Estreta => Lat: 39.754595185318855, Lon: 3.412146318804192
+2024-08-09 10:42:10 - root - INFO - Fetched URL 1
+2024-08-09 10:42:10 - root - INFO - Fetched URL 1
+2024-08-09 10:42:10 - root - INFO - Fetched URL 2
+2024-08-09 10:42:10 - root - INFO - Sample retrieved from API
+2024-08-09 10:42:10 - root - INFO - Sample processed and cleaned
+2024-08-09 10:42:10 - root - INFO - Sample uploaded to database
+2024-08-09 10:42:10 - root - INFO - Location last refresh time updated
+2024-08-09 10:42:10 - root - INFO - True
+2024-08-09 10:42:10 - root - INFO - ---
+2024-08-09 10:42:10 - root - INFO - Fetching data for location: Es Trenc
+2024-08-09 10:42:10 - root - INFO - Es Trenc => Lat: 39.34600987342693, Lon: 2.982990473995135
+2024-08-09 10:42:11 - root - INFO - Fetched URL 1
+2024-08-09 10:42:11 - root - INFO - Fetched URL 1
+2024-08-09 10:42:11 - root - INFO - Fetched URL 2
+2024-08-09 10:42:11 - root - INFO - Sample retrieved from API
+2024-08-09 10:42:11 - root - INFO - Sample processed and cleaned
+2024-08-09 10:42:11 - root - INFO - Sample uploaded to database
+2024-08-09 10:42:11 - root - INFO - Location last refresh time updated
+2024-08-09 10:42:11 - root - INFO - True
