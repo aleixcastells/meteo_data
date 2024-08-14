@@ -4,8 +4,6 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from helpers.logger import log
 
-from datetime import datetime
-
 import time
 from data_handler.fetch_api import fetchApi
 
@@ -59,11 +57,16 @@ class mongoHandler:
             {"location_id": location_id},
             {
                 "$set": {
-                    "refresh_time_unix": current_unix_time,
+                    # "refresh_time_unix": current_unix_time,
+                    "refresh_time_unix": 0,
                 }
             },
         )
         log("info", "Location last refresh time updated")
+
+    def addNewLocation(self, data):
+        self.locations_collection.insert_one(data)
+        log("info", "Location added to database")
 
     # Function to close the connection to Mongo
     def close(self):

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+</head>
+
+<body>
+    <h1>Submit Your Data</h1>
+    <form id="dataForm">
+        <label for="textInput1">location_enabled:</label>
+        <select id="location_enabled_select">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select><br><br>
+
+        <label for="location_name">location_name: (name)</label>
+        <input type="text" id="location_name_input" name="location_name_input"><br><br>
+
+        <label for="location_groups">location_groups: (grp1, grp2)</label>
+        <input type="text" id="location_groups_input" name="location_groups_input"><br><br>
+
+        <label for="location_coordinates">location_coordinates: (lat, long)</label>
+        <input type="text" id="location_coordinates_input" name="location_coordinates_input"><button type="button"
+            onclick="pasteLocation()">Paste</button><br><br>
+
+        <label for="currents_coordinates">currents_coordinates: (lat, long) <span id="currents_ok_sign"></span></label>
+        <input type="text" id="currents_coordinates_input" name="currents_coordinates_input"><button type="button"
+            onclick="checkCurrents()">Check</button><br><br>
+
+        <label for="location_exposure_range_a">location_exposure_range_a: (0-359)</label>
+        <input type="number" id="location_exposure_range_a_input" name="location_exposure_range_a_input"><br><br>
+
+        <label for="location_exposure_range_b">location_exposure_range_b: (0-359)</label>
+        <input type="number" id="location_exposure_range_b_input" name="location_exposure_range_b_input"><br><br>
+
+        <label for="refresh_rate">refresh_rate: (1-24)</label>
+        <input type="number" id="refresh_rate_input" name="refresh_rate_input" value="6"><br><br>
+
+        <!-- New Button to Check Currents -->
+        <button type="button" onclick="submitData()">Submit</button>
+    </form>
+
+    <script>
+        function submitData() {
+            // Pre-process inputs
+
+            let location_enabled_select = document.getElementById('location_enabled_select').value
+            let location_name_input = document.getElementById('location_name_input').value
+            let location_groups_input = document.getElementById('location_groups_input').value
+            let location_coordinates_input = document.getElementById('location_coordinates_input').value
+            let currents_coordinates_input = document.getElementById('currents_coordinates_input').value
+            let location_exposure_range_a_input = parseInt(document.getElementById('location_exposure_range_a_input').value)
+            let location_exposure_range_b_input = parseInt(document.getElementById('location_exposure_range_b_input').value)
+            let refresh_rate_input = parseInt(document.getElementById('refresh_rate_input').value)
+
+
+            const data = {
+                location_enabled: Boolean(location_enabled_select),
+                location_name: location_name_input,
+                location_groups: location_groups_input.split(','),
+                location_longitude: parseFloat(location_coordinates_input.split(',')[1]),
+                location_latitude: parseFloat(location_coordinates_input.split(',')[0]),
+                currents_longitude: parseFloat(currents_coordinates_input.split(',')[1]),
+                currents_latitude: parseFloat(currents_coordinates_input.split(',')[0]),
+                location_exposure_range: [location_exposure_range_a_input, location_exposure_range_b_input],
+                refresh_rate: refresh_rate_input
+            };
+
+            console.log(data)
+
+            // Validate or manipulate data as needed
+            // For example: simple validation
+            if (
+                !data.location_enabled ||
+                data.location_name == "" ||
+                data.location_groups == "" ||
+                isNaN(data.location_longitude) ||
+                isNaN(data.location_latitude) ||
+                isNaN(data.currents_longitude) ||
+                isNaN(data.currents_latitude) ||
+                isNaN(data.location_exposure_range[0]) ||
+                isNaN(data.location_exposure_range[1]) ||
+                isNaN(data.refresh_rate)
+            ) {
+                alert("Please fill out all fields correctly.");
+                return;
+            }
+
+            // Send data to Flask using fetch
+            fetch('http://localhost:5001/process_data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result); // Handle the response from Flask
+                    alert("Data submitted successfully!");
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function checkCurrents() {
+            navigator.clipboard.readText().then(
+                clipText => {
+                    // Set the clipboard text into the input field
+                    document.getElementById('currents_coordinates_input').value = clipText;
+
+                    // Ensure the coordinates are valid before proceeding
+                    let currents_coordinates_input = document.getElementById('currents_coordinates_input').value;
+
+                    if (!currents_coordinates_input.includes(",")) {
+                        alert("Please enter valid coordinates in the format 'latitude,longitude'.");
+                        return;
+                    }
+
+                    let currents_longitude = currents_coordinates_input.split(',')[1].trim();
+                    let currents_latitude = currents_coordinates_input.split(',')[0].trim();
+
+                    if (isNaN(currents_longitude) || isNaN(currents_latitude)) {
+                        alert("Invalid coordinates format. Please ensure they are numbers.");
+                        return;
+                    }
+
+                    // Send the data to Flask using fetch
+                    fetch('http://localhost:5001/check_currents', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            currents_longitude: parseFloat(currents_longitude),
+                            currents_latitude: parseFloat(currents_latitude)
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            // Show an alert with the result (True or False)
+                            if (result.result == true) {
+                                document.getElementById("currents_ok_sign").innerText = "\u{2705}"
+                            }
+                            if (result.result == false) {
+                                document.getElementById("currents_ok_sign").innerText = "\u{1F6AB}"
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
+            ).catch(err => {
+                console.error('Failed to read clipboard contents: ', err);
+            });
+        }
+
+        function pasteLocation() {
+            // Access the clipboard and read the content
+            navigator.clipboard.readText().then(
+                clipText => {
+                    document.getElementById('location_coordinates_input').value = ""
+                    document.getElementById('location_coordinates_input').value = clipText
+                }
+            ).catch(err => {
+                console.error('Failed to read clipboard contents: ', err);
+            });
+        }
+    </script>
+</body>
+
+</html>

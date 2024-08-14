@@ -1,108 +1,86 @@
 # openmeteo.py
 
 import json
-import time
-import pytz
 
 from data_handler.fetch_api import fetchApi
-from datetime import datetime
 from helpers.logger import log
-
-spain_timezone = pytz.timezone("Europe/Madrid")
-spain_time = datetime.now(spain_timezone)
 
 
 class OpenMeteo:
 
     def __init__(
         self,
-        location_id,
-        location_name,
-        location_latitude,
-        location_longitude,
-        currents_latitude,
-        currents_longitude,
+        request,
     ):
-        self.location_id = location_id
-        self.location_name = location_name
-        self.location_latitude = location_latitude
-        self.location_longitude = location_longitude
-        self.currents_latitude = currents_latitude
-        self.currents_longitude = currents_longitude
-
-    def fetch_weather(self):
-
-        location_data = fetchApi(self.location_latitude, self.location_longitude, 1)
-        currents_data = fetchApi(self.currents_latitude, self.currents_longitude, 1)
-        weather_data = fetchApi(self.location_latitude, self.location_longitude, 2)
+        self.request = request
+        self.offset = 24 * 8
+        self.fetch_api()  # Automatically fetch data when object is created
         log("info", "Sample retrieved from API")
 
-        weather_data_raw = {
-            "location_id": self.location_id,
-            "location_name": self.location_name,
-            "fetched_spanish_time": spain_time.isoformat(),
-            "fetched_unix_time": int(time.time()),  # Get current Unix timestamp
-            "daily_data": {
-                "sunrise": weather_data["daily"]["sunrise"][3],
-                "sunset": weather_data["daily"]["sunset"][3],
-                "sunlight": weather_data["daily"]["sunshine_duration"][3],
-                "precipitation_total": weather_data["daily"]["precipitation_sum"][3],
-                "wind_main_direction": weather_data["daily"][
-                    "wind_direction_10m_dominant"
-                ][3],
-                "precipitation_total": weather_data["daily"]["precipitation_sum"][3],
-            },
-        }
+    def fetch_api(self):
+        self.currents_data = fetchApi(self.request["currents"], "marine")
+        self.location_data = fetchApi(self.request["location"], "marine")
+        self.weather_data = fetchApi(self.request["location"], "forecast")
 
-        # Generate intervals every hour up to 72 hours ago
+    # daily methods
 
-        time_intervals = [(0, "T_0")]
+    def get_d_sunrise(self):
+        return self.weather_data["daily"]["sunrise"][7]
 
-        # To modify intervals change the first and last values in range(1,2,1) equally.
-        for i in range(1, 73, 1):
-            time_intervals.append((i, f"T_{i}"))
+    def get_d_sunset(self):
+        return self.weather_data["daily"]["sunset"][7]
 
-        # The last entry in the hourly list is assumed to be the most recent (current hour)
-        last_index = len(location_data["hourly"]["time"]) - 48
+    def get_d_sunlight(self):
+        return self.weather_data["daily"]["sunshine_duration"][7]
 
-        # Dynamically build the dictionary based on the defined intervals
-        for hours_back, label in time_intervals:
-            index = (
-                last_index - hours_back
-            )  # Calculate the index relative to the current time
-            if index >= 0:  # Ensure the index is within bounds
-                weather_data_raw[label] = {
-                    "sample_time": location_data["hourly"]["time"][index],
-                    "wave_direction": location_data["hourly"]["wave_direction"][index],
-                    "wind_wave_direction": location_data["hourly"][
-                        "wind_wave_direction"
-                    ][index],
-                    "swell_wave_direction": location_data["hourly"][
-                        "swell_wave_direction"
-                    ][index],
-                    "ocean_current_direction": currents_data["hourly"][
-                        "ocean_current_direction"
-                    ][index],
-                    "ocean_current_velocity": currents_data["hourly"][
-                        "ocean_current_velocity"
-                    ][index],
-                    "air_temperature": weather_data["hourly"]["temperature_2m"][index],
-                    "air_humidity": weather_data["hourly"]["relative_humidity_2m"][
-                        index
-                    ],
-                    "cloud_cover": weather_data["hourly"]["cloud_cover"][index],
-                    "wind_speed": weather_data["hourly"]["wind_speed_10m"][index],
-                    "uv_index": weather_data["hourly"]["uv_index"][index],
-                    "is_day": (
-                        True if (weather_data["hourly"]["is_day"][index]) else False
-                    ),
-                }
-            else:
-                log("warn", f"No data available for {label}")
+    def get_d_precipitation_total(self):
+        return self.weather_data["daily"]["precipitation_sum"][7]
 
-        # Print the result in JSON format for better readability
-        weather_data_formatted = json.dumps(
-            weather_data_raw, indent=4, ensure_ascii=False
+    def get_d_wind_main_direction(self):
+        return self.weather_data["daily"]["wind_direction_10m_dominant"][7]
+
+    # hourly methods
+
+    def get_h_sample_time(self, index):
+        return self.location_data["hourly"]["time"][self.offset - index]
+
+    def get_h_wave_direction(self, index):
+        return self.location_data["hourly"]["wave_direction"][self.offset - index]
+
+    def get_h_wind_wave_direction(self, index):
+        return self.location_data["hourly"]["wind_wave_direction"][self.offset - index]
+
+    def get_h_swell_wave_direction(self, index):
+        return self.location_data["hourly"]["swell_wave_direction"][self.offset - index]
+
+    def get_h_ocean_current_direction(self, index):
+        return self.currents_data["hourly"]["ocean_current_direction"][
+            self.offset - index
+        ]
+
+    def get_h_ocean_current_velocity(self, index):
+        return self.currents_data["hourly"]["ocean_current_velocity"][
+            self.offset - index
+        ]
+
+    def get_h_air_temperature(self, index):
+        return self.weather_data["hourly"]["temperature_2m"][self.offset - index]
+
+    def get_h_air_humidity(self, index):
+        return self.weather_data["hourly"]["relative_humidity_2m"][self.offset - index]
+
+    def get_h_cloud_cover(self, index):
+        return self.weather_data["hourly"]["cloud_cover"][self.offset - index]
+
+    def get_h_wind_speed(self, index):
+        return self.weather_data["hourly"]["wind_speed_10m"][self.offset - index]
+
+    def get_h_uv_index(self, index):
+        return self.weather_data["hourly"]["uv_index"][self.offset - index]
+
+    def get_h_is_day(self, index):
+        return (
+            True
+            if (self.weather_data["hourly"]["is_day"][self.offset - index])
+            else False
         )
-        log("info", "Sample processed and cleaned")
-        return weather_data_raw

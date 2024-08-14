@@ -4,5 +4,6 @@
 .env
 *.sqlite
 *.pyc
-.log
-.DS_Store
+*.log
+*.DS_Store
+cron.log
