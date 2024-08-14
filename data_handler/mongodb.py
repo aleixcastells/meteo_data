@@ -57,8 +57,8 @@ class mongoHandler:
             {"location_id": location_id},
             {
                 "$set": {
-                    # "refresh_time_unix": current_unix_time,
-                    "refresh_time_unix": 0,
+                    "refresh_time_unix": current_unix_time,
+                    # "refresh_time_unix": 0,
                 }
             },
         )
