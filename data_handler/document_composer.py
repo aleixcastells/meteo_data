@@ -9,7 +9,7 @@ from api_handler.openmeteo import OpenMeteo
 
 spain_timezone = pytz.timezone("Europe/Madrid")
 spain_time = datetime.now(spain_timezone)
-h_samples_history = 48
+h_samples_history = 72
 
 
 def documentComposer(request):
