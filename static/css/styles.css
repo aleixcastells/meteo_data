@@ -1,0 +1,111 @@
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Grid layout for the form */
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* Label 1fr, Input 2fr, Button 1fr */
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Labels align to the right */
+form label {
+    text-align: right;
+    padding-right: 10px;
+    grid-column: 1 / 2;
+}
+
+/* Inputs, select, and buttons */
+form input[type="text"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    grid-column: 2 / 3;
+}
+
+/* Buttons */
+form button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    grid-column: 3 / 4;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+/* Responsive behavior */
+@media (max-width: 600px) {
+    form {
+        grid-template-columns: 1fr 1fr;
+        /* Stack the label and input on small screens */
+    }
+
+    form label {
+        text-align: left;
+        padding-right: 0;
+        grid-column: 1 / 2;
+    }
+
+    form input[type="text"],
+    form input[type="number"],
+    form select {
+        grid-column: 1 / 3;
+        /* Inputs span across both columns */
+    }
+
+    form button {
+        grid-column: 1 / 3;
+        /* Buttons span across both columns */
+    }
+}
+
+/* Handling rows without a button */
+.form-row-no-button {
+    grid-column: 1 / span 3;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    /* Label and input take up full width */
+}
+
+.form-row-no-button label {
+    grid-column: 1 / 2;
+}
+
+.form-row-no-button input[type="text"],
+.form-row-no-button input[type="number"],
+.form-row-no-button select {
+    grid-column: 2 / span 2;
+    /* Input takes up extra space */
+}
+
+input,
+select {
+    margin-top: 7px;
+}
