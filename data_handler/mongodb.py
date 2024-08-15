@@ -22,7 +22,6 @@ class mongoHandler:
         api_handler_collection_name,
     ):
         load_dotenv()
-        log("info", "-")
 
         try:
             self.client = MongoClient(uri)
@@ -41,6 +40,8 @@ class mongoHandler:
 
     # Function to load the locations that have been added to the watchlist
     def get_locations(self):
+        log("info", "-")
+
         log("info", f"Using database: {self.db.name}")
         log("info", f"Using collection: {self.locations_collection.name}")
 
