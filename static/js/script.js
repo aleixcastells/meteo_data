@@ -3,7 +3,7 @@ function submitData() {
 
     let location_enabled_select = document.getElementById('location_enabled_select').value
     let location_name_input = document.getElementById('location_name_input').value
-    let location_groups_input = document.getElementById('location_groups_input').value
+    let location_group_input = document.getElementById('location_group_input').value
     let location_coordinates_input = document.getElementById('location_coordinates_input').value
     let currents_coordinates_input = document.getElementById('currents_coordinates_input').value
     let location_exposure_range_a_input = parseInt(document.getElementById('location_exposure_range_a_input').value)
@@ -13,7 +13,7 @@ function submitData() {
     const data = {
         location_enabled: Boolean(location_enabled_select),
         location_name: location_name_input,
-        location_groups: location_groups_input.split(','),
+        location_group: location_group_input,
         location_longitude: parseFloat(location_coordinates_input.split(',')[1]),
         location_latitude: parseFloat(location_coordinates_input.split(',')[0]),
         currents_longitude: parseFloat(currents_coordinates_input.split(',')[1]),
@@ -29,7 +29,7 @@ function submitData() {
     if (
         !data.location_enabled ||
         data.location_name == "" ||
-        data.location_groups == "" ||
+        data.location_group == "" ||
         isNaN(data.location_longitude) ||
         isNaN(data.location_latitude) ||
         isNaN(data.currents_longitude) ||

@@ -1,8 +1,11 @@
 # openmeteo.py
 
+# dependencies
 import json
 
+# files
 from data_handler.fetch_api import fetchApi
+from api_handler.api_usage import ApiUsage
 from helpers.logger import log
 
 
@@ -14,13 +17,21 @@ class OpenMeteo:
     ):
         self.request = request
         self.offset = 24 * 8
-        self.fetch_api()  # Automatically fetch data when object is created
-        log("info", "Sample retrieved from API")
+        self.api_usage = ApiUsage()
+
+        if not self.api_usage.limit_reached("openmeteo", 3):
+            self.fetch_api()  # Automatically fetch data when object is created
+            log("info", "Sample retrieved from API")
+
+        else:
+            log("info", "Could not fetch")
 
     def fetch_api(self):
+
         self.currents_data = fetchApi(self.request["currents"], "marine")
         self.location_data = fetchApi(self.request["location"], "marine")
         self.weather_data = fetchApi(self.request["location"], "forecast")
+        self.api_usage.record_call("openmeteo", 3)
 
     # daily methods
 

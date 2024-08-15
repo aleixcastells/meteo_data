@@ -1,7 +1,5 @@
 # urls.py
 
-from helpers.logger import log
-
 
 class URL:
     def __init__(self, latitude, longitude, url_selector):
@@ -9,7 +7,7 @@ class URL:
         self.longitude = longitude
         self.url_selector = url_selector
 
-    def openmeteo(self):
+    def get_url(self):
         url_marine = (
             "https://marine-api.open-meteo.com/v1/marine?"
             f"latitude={self.latitude}&longitude={self.longitude}&"

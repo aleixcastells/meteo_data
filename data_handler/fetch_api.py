@@ -1,6 +1,9 @@
 # fetch.py
 
+# dependencies
 import requests
+
+# files
 from data_handler.urls import URL
 from helpers.logger import log
 
@@ -9,7 +12,7 @@ def fetchApi(request, url_selector):
 
     try:
         response = requests.get(
-            URL(request["latitude"], request["longitude"], url_selector).openmeteo()
+            URL(request["latitude"], request["longitude"], url_selector).get_url()
         )
         response.raise_for_status()  # Raises an error for bad HTTP status codes
         data = response.json()

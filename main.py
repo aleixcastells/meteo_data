@@ -1,12 +1,17 @@
 # main.py
 
-import os
+# dependencies
 from dotenv import load_dotenv
-from data_handler.mongodb import mongoHandler
-from api_handler.openmeteo import OpenMeteo
+
+# data handler
+from data_handler.mongodb import mongoHandler, mongoURI
+from data_handler.document_composer import documentComposer
+from data_handler.group_updater import groupUpdater
+
+# helpers
 from helpers.age_check import ageCheck
 from helpers.logger import log
-from data_handler.document_composer import documentComposer
+from config import get_mongo_handler
 
 
 def main():
@@ -14,23 +19,35 @@ def main():
     load_dotenv()
     log("info", f"--------------------------------------------------------------")
 
-    # MongoDB connection details from environment variables
-    MONGO_URI_USR = os.getenv("MONGO_URI_USR")
-    MONGO_URI_PWD = os.getenv("MONGO_URI_PWD")
-    MONGO_URI_CLUSTER = os.getenv("MONGO_URI_CLUSTER")
-    MONGO_URI = f"mongodb+srv://{MONGO_URI_USR}:{MONGO_URI_PWD}@cluster0.jdmwldh.mongodb.net/?retryWrites=true&w=majority&appName={MONGO_URI_CLUSTER}"
+    mongo_handler = get_mongo_handler()
+    # update the groups that require it
+    groups = mongo_handler.get_groups()
 
-    database_name = "meteo_data"
-    locations_collection_name = "locations"
-    samples_collection_name = "samples"
+    for i, group in enumerate(groups):
+        log("info", "---")
 
-    # Initialize MongoDB handler
-    mongo_handler = mongoHandler(
-        MONGO_URI, database_name, locations_collection_name, samples_collection_name
-    )
+        if ageCheck(group["refresh_time_unix"], group["refresh_rate"]):
+            log(
+                "info",
+                f"[{i+1}] Fetching data for group: {group['group_name']}",
+            )
+            groups_request = {
+                "latitude": group["location_latitude"],
+                "longitude": group["location_longitude"],
+            }
+
+            # Fetch and update the group data
+            groupUpdater(
+                groups_request, group["group_id"], group["group_name"], mongo_handler
+            )
+
+        else:
+            log("info",f"Skipped {group['group_name']} refresh")
 
     # Get locations to fetch data for
     locations = mongo_handler.get_locations()
+    # Create a dictionary that maps group_id to group
+    group_map = {group["group_number"]: group for group in groups}
 
     # Iterate through all the locations and gather data
     for i, location in enumerate(locations):
@@ -49,10 +66,17 @@ def main():
             # [location] is the place we want to analise
             # [currents] is a location nearby that has currents information available
 
-            request = {
+            # Look up the group using the group_id in the location
+            group = group_map.get(location["location_group"])
+
+            # Debugging output
+            log("info", f"Location group: {location["location_group"]}")
+
+            location_request = {
                 "location": {
                     "id": location["location_id"],
                     "name": location["location_name"],
+                    "group": group,  # Add the group to the request
                     "latitude": location["location_latitude"],
                     "longitude": location["location_longitude"],
                 },
@@ -63,7 +87,7 @@ def main():
             }
 
             # Use the documentComposer object, which precesses the data and prepares it for storage
-            new_sample = documentComposer(request)
+            new_sample = documentComposer(location_request)
 
             # Store the weather data in MongoDB
             mongo_handler.store_processed_data(new_sample)

@@ -1,9 +1,12 @@
 # document_composer.py
 
+# dependencies
 import json
 import time
 import pytz
 from datetime import datetime
+
+# files
 from helpers.logger import log
 from api_handler.openmeteo import OpenMeteo
 
@@ -28,6 +31,9 @@ def documentComposer(request):
             "sunlight": open_meteo.get_d_sunlight(),
             "precipitation_total": open_meteo.get_d_precipitation_total(),
             "wind_main_direction": open_meteo.get_d_wind_main_direction(),
+            "water_surface_temperature": request["location"]["group"][
+                "water_surface_temperature"
+            ],
         },
         "hourly_data": {},
     }
@@ -47,10 +53,7 @@ def documentComposer(request):
             "wind_speed": open_meteo.get_h_wind_speed(i),
             "uv_index": open_meteo.get_h_uv_index(i),
             "is_day": open_meteo.get_h_uv_index(i),
-            "water_surface_temperature": None,
         }
 
-    # Print the result in JSON format for better readability
-    document_formatted = json.dumps(document, indent=4, ensure_ascii=False)
     log("info", "Sample processed and cleaned")
     return document
