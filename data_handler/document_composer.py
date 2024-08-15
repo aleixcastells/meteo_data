@@ -34,6 +34,7 @@ def documentComposer(request):
             "water_surface_temperature": request["location"]["group"][
                 "water_surface_temperature"
             ],
+            "water_salinity": request["location"]["group"]["water_salinity"],
         },
         "hourly_data": {},
     }

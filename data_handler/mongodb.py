@@ -122,6 +122,7 @@ class mongoHandler:
             {
                 "$set": {
                     "water_surface_temperature": request["water_temperature"],
+                    "water_salinity": request["water_salinity"],
                     "refresh_time_unix": int(time.time()),
                 }
             },
@@ -131,7 +132,7 @@ class mongoHandler:
         else:
             log(
                 "info",
-                f"Updated water_surface_temperature for group_id: {group_id}.",
+                f"Updated water_surface_temperature for group_id: {group_id}. Updated water_surface_temperature for group_id: {group_id}.",
             )
 
     # Function to close the connection to Mongo
