@@ -24,7 +24,7 @@ def main():
     groups = mongo_handler.get_groups()
 
     for i, group in enumerate(groups):
-        
+
         if group["group_enabled"] and ageCheck(group["refresh_time_unix"], group["refresh_rate"]):
             log(
                 "info",
@@ -47,7 +47,7 @@ def main():
 
     # Iterate through all the locations and gather data
     for i, location in enumerate(locations):
-        log("info", "-")
+        log("info", ">>")
 
         # Checks if that location is enabled and if it's time to refresh it again
         if location["location_enabled"] and ageCheck(
