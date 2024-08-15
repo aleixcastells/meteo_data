@@ -19,7 +19,7 @@ class StormGlass:
         self.bio_data = None  # This will hold the fetched data
         self.api_usage = ApiUsage()  # Create an instance of ApiUsage
 
-        if not self.api_usage.limit_reached("stormglass", 2):
+        if not self.api_usage.limit_reached("stormglass", 1):
             self.fetch_api()  # Automatically fetch data when the object is created
 
         log("info", "Sample retrieved from API")
@@ -49,7 +49,6 @@ class StormGlass:
             weather_response.raise_for_status()  # Raise an error for bad responses
 
             self.weather_data = weather_response.json()  # Store the response JSON
-            self.api_usage.record_call("stormglass", 1)
 
             bio_response = requests.get(
                 "https://api.stormglass.io/v2/bio/point",
