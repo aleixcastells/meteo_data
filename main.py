@@ -66,7 +66,7 @@ def main():
             group = group_map.get(location["location_group"])
 
             # Debugging output
-            log("info", f"Location group: {location["location_group"]}")
+            log("info", f"Location group: {location['location_group']}")
 
             location_request = {
                 "location": {

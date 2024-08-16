@@ -1,0 +1,16 @@
+  File "/home/aleixcastells/meteo_data/main.py", line 73
+    log("info", f"Location group: {location["location_group"]}")
+                                             ^^^^^^^^^^^^^^
+SyntaxError: f-string: unmatched '['
+  File "/home/aleixcastells/meteo_data/main.py", line 73
+    log("info", f"Location group: {location["location_group"]}")
+                                             ^^^^^^^^^^^^^^
+SyntaxError: f-string: unmatched '['
+  File "/home/aleixcastells/meteo_data/main.py", line 73
+    log("info", f"Location group: {location["location_group"]}")
+                                             ^^^^^^^^^^^^^^
+SyntaxError: f-string: unmatched '['
+  File "/home/aleixcastells/meteo_data/main.py", line 69
+    log("info", f"Location group: {location["location_group"]}")
+                                             ^^^^^^^^^^^^^^
+SyntaxError: f-string: unmatched '['
