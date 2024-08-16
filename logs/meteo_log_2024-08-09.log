@@ -1,27 +1,153 @@
-2024-08-09 12:30:02 - root - INFO - --------------------------
-2024-08-09 12:30:03 - root - INFO - MongoDB connection established successfully.
-2024-08-09 12:30:03 - root - INFO - Using database: meteo_data
-2024-08-09 12:30:03 - root - INFO - Using collection: locations
-2024-08-09 12:30:03 - root - INFO - Found 2 locations.
-2024-08-09 12:30:03 - root - INFO - ---
-2024-08-09 12:30:03 - root - INFO - Fetching data for location: Cala Estreta
-2024-08-09 12:30:03 - root - INFO - Cala Estreta => Lat: 39.754595185318855, Lon: 3.412146318804192
-2024-08-09 12:30:03 - root - INFO - Fetched URL 1
-2024-08-09 12:30:03 - root - INFO - Fetched URL 1
-2024-08-09 12:30:03 - root - INFO - Fetched URL 2
-2024-08-09 12:30:03 - root - INFO - Sample retrieved from API
-2024-08-09 12:30:03 - root - INFO - Sample processed and cleaned
-2024-08-09 12:30:03 - root - INFO - Sample uploaded to database
-2024-08-09 12:30:03 - root - INFO - Location last refresh time updated
-2024-08-09 12:30:03 - root - INFO - Location was sampled: True
-2024-08-09 12:30:03 - root - INFO - ---
-2024-08-09 12:30:03 - root - INFO - Fetching data for location: Es Trenc
-2024-08-09 12:30:03 - root - INFO - Es Trenc => Lat: 39.34600987342693, Lon: 2.982990473995135
-2024-08-09 12:30:03 - root - INFO - Fetched URL 1
-2024-08-09 12:30:04 - root - INFO - Fetched URL 1
-2024-08-09 12:30:04 - root - INFO - Fetched URL 2
-2024-08-09 12:30:04 - root - INFO - Sample retrieved from API
-2024-08-09 12:30:04 - root - INFO - Sample processed and cleaned
-2024-08-09 12:30:04 - root - INFO - Sample uploaded to database
-2024-08-09 12:30:04 - root - INFO - Location last refresh time updated
-2024-08-09 12:30:04 - root - INFO - Location was sampled: True
+2024-08-09 12:39:02 - root - INFO - --------------------------
+2024-08-09 12:39:03 - root - INFO - MongoDB connection established successfully.
+2024-08-09 12:39:03 - root - INFO - Using database: meteo_data
+2024-08-09 12:39:03 - root - INFO - Using collection: locations
+2024-08-09 12:39:03 - root - INFO - Found 2 locations.
+2024-08-09 12:39:03 - root - INFO - ---
+2024-08-09 12:39:03 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 12:39:03 - root - INFO - ---
+2024-08-09 12:39:03 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 12:41:02 - root - INFO - --------------------------
+2024-08-09 12:41:02 - root - INFO - MongoDB connection established successfully.
+2024-08-09 12:41:02 - root - INFO - Using database: meteo_data
+2024-08-09 12:41:02 - root - INFO - Using collection: locations
+2024-08-09 12:41:02 - root - INFO - Found 2 locations.
+2024-08-09 12:41:02 - root - INFO - ---
+2024-08-09 12:41:02 - root - INFO - Fetching data for location: Cala Estreta
+2024-08-09 12:41:02 - root - INFO - Cala Estreta => Lat: 39.754595185318855, Lon: 3.412146318804192
+2024-08-09 12:41:02 - root - INFO - Fetched URL 1
+2024-08-09 12:41:03 - root - INFO - Fetched URL 1
+2024-08-09 12:41:03 - root - INFO - Fetched URL 2
+2024-08-09 12:41:03 - root - INFO - Sample retrieved from API
+2024-08-09 12:41:03 - root - INFO - Sample processed and cleaned
+2024-08-09 12:41:03 - root - INFO - Sample uploaded to database
+2024-08-09 12:41:03 - root - INFO - Location last refresh time updated
+2024-08-09 12:41:03 - root - INFO - Location (Cala Estreta: 1000000) was sampled: True
+2024-08-09 12:41:03 - root - INFO - ---
+2024-08-09 12:41:03 - root - INFO - Fetching data for location: Es Trenc
+2024-08-09 12:41:03 - root - INFO - Es Trenc => Lat: 39.34600987342693, Lon: 2.982990473995135
+2024-08-09 12:41:03 - root - INFO - Fetched URL 1
+2024-08-09 12:41:03 - root - INFO - Fetched URL 1
+2024-08-09 12:41:03 - root - INFO - Fetched URL 2
+2024-08-09 12:41:03 - root - INFO - Sample retrieved from API
+2024-08-09 12:41:03 - root - INFO - Sample processed and cleaned
+2024-08-09 12:41:03 - root - INFO - Sample uploaded to database
+2024-08-09 12:41:03 - root - INFO - Location last refresh time updated
+2024-08-09 12:41:03 - root - INFO - Location (Es Trenc: 1000001) was sampled: True
+2024-08-09 13:41:02 - root - INFO - --------------------------
+2024-08-09 13:41:02 - root - INFO - MongoDB connection established successfully.
+2024-08-09 13:41:02 - root - INFO - Using database: meteo_data
+2024-08-09 13:41:02 - root - INFO - Using collection: locations
+2024-08-09 13:41:02 - root - INFO - Found 2 locations.
+2024-08-09 13:41:02 - root - INFO - ---
+2024-08-09 13:41:02 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 13:41:02 - root - INFO - ---
+2024-08-09 13:41:02 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 14:41:02 - root - INFO - --------------------------
+2024-08-09 14:41:02 - root - INFO - MongoDB connection established successfully.
+2024-08-09 14:41:02 - root - INFO - Using database: meteo_data
+2024-08-09 14:41:02 - root - INFO - Using collection: locations
+2024-08-09 14:41:02 - root - INFO - Found 2 locations.
+2024-08-09 14:41:02 - root - INFO - ---
+2024-08-09 14:41:02 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 14:41:02 - root - INFO - ---
+2024-08-09 14:41:02 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 15:41:02 - root - INFO - --------------------------
+2024-08-09 15:41:03 - root - INFO - MongoDB connection established successfully.
+2024-08-09 15:41:03 - root - INFO - Using database: meteo_data
+2024-08-09 15:41:03 - root - INFO - Using collection: locations
+2024-08-09 15:41:03 - root - INFO - Found 2 locations.
+2024-08-09 15:41:03 - root - INFO - ---
+2024-08-09 15:41:03 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 15:41:03 - root - INFO - ---
+2024-08-09 15:41:03 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 16:41:02 - root - INFO - --------------------------
+2024-08-09 16:41:02 - root - INFO - MongoDB connection established successfully.
+2024-08-09 16:41:02 - root - INFO - Using database: meteo_data
+2024-08-09 16:41:02 - root - INFO - Using collection: locations
+2024-08-09 16:41:02 - root - INFO - Found 2 locations.
+2024-08-09 16:41:02 - root - INFO - ---
+2024-08-09 16:41:02 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 16:41:02 - root - INFO - ---
+2024-08-09 16:41:02 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 17:41:02 - root - INFO - --------------------------
+2024-08-09 17:41:02 - root - INFO - MongoDB connection established successfully.
+2024-08-09 17:41:02 - root - INFO - Using database: meteo_data
+2024-08-09 17:41:02 - root - INFO - Using collection: locations
+2024-08-09 17:41:02 - root - INFO - Found 2 locations.
+2024-08-09 17:41:02 - root - INFO - ---
+2024-08-09 17:41:02 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 17:41:02 - root - INFO - ---
+2024-08-09 17:41:02 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 18:41:02 - root - INFO - --------------------------
+2024-08-09 18:41:02 - root - INFO - MongoDB connection established successfully.
+2024-08-09 18:41:02 - root - INFO - Using database: meteo_data
+2024-08-09 18:41:02 - root - INFO - Using collection: locations
+2024-08-09 18:41:02 - root - INFO - Found 2 locations.
+2024-08-09 18:41:02 - root - INFO - ---
+2024-08-09 18:41:02 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 18:41:02 - root - INFO - ---
+2024-08-09 18:41:02 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 19:41:02 - root - INFO - --------------------------
+2024-08-09 19:41:02 - root - INFO - MongoDB connection established successfully.
+2024-08-09 19:41:02 - root - INFO - Using database: meteo_data
+2024-08-09 19:41:02 - root - INFO - Using collection: locations
+2024-08-09 19:41:02 - root - INFO - Found 2 locations.
+2024-08-09 19:41:02 - root - INFO - ---
+2024-08-09 19:41:02 - root - INFO - Fetching data for location: Cala Estreta
+2024-08-09 19:41:02 - root - INFO - Cala Estreta => Lat: 39.754595185318855, Lon: 3.412146318804192
+2024-08-09 19:41:03 - root - INFO - Fetched URL 1
+2024-08-09 19:41:03 - root - INFO - Fetched URL 1
+2024-08-09 19:41:03 - root - INFO - Fetched URL 2
+2024-08-09 19:41:03 - root - INFO - Sample retrieved from API
+2024-08-09 19:41:03 - root - INFO - Sample processed and cleaned
+2024-08-09 19:41:03 - root - INFO - Sample uploaded to database
+2024-08-09 19:41:03 - root - INFO - Location last refresh time updated
+2024-08-09 19:41:03 - root - INFO - Location (Cala Estreta: 1000000) was sampled: True
+2024-08-09 19:41:03 - root - INFO - ---
+2024-08-09 19:41:03 - root - INFO - Fetching data for location: Es Trenc
+2024-08-09 19:41:03 - root - INFO - Es Trenc => Lat: 39.34600987342693, Lon: 2.982990473995135
+2024-08-09 19:41:03 - root - INFO - Fetched URL 1
+2024-08-09 19:41:03 - root - INFO - Fetched URL 1
+2024-08-09 19:41:04 - root - INFO - Fetched URL 2
+2024-08-09 19:41:04 - root - INFO - Sample retrieved from API
+2024-08-09 19:41:04 - root - INFO - Sample processed and cleaned
+2024-08-09 19:41:04 - root - INFO - Sample uploaded to database
+2024-08-09 19:41:04 - root - INFO - Location last refresh time updated
+2024-08-09 19:41:04 - root - INFO - Location (Es Trenc: 1000001) was sampled: True
+2024-08-09 20:41:02 - root - INFO - --------------------------
+2024-08-09 20:41:03 - root - INFO - MongoDB connection established successfully.
+2024-08-09 20:41:03 - root - INFO - Using database: meteo_data
+2024-08-09 20:41:03 - root - INFO - Using collection: locations
+2024-08-09 20:41:03 - root - INFO - Found 2 locations.
+2024-08-09 20:41:03 - root - INFO - ---
+2024-08-09 20:41:03 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 20:41:03 - root - INFO - ---
+2024-08-09 20:41:03 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 21:41:02 - root - INFO - --------------------------
+2024-08-09 21:41:03 - root - INFO - MongoDB connection established successfully.
+2024-08-09 21:41:03 - root - INFO - Using database: meteo_data
+2024-08-09 21:41:03 - root - INFO - Using collection: locations
+2024-08-09 21:41:03 - root - INFO - Found 2 locations.
+2024-08-09 21:41:03 - root - INFO - ---
+2024-08-09 21:41:03 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 21:41:03 - root - INFO - ---
+2024-08-09 21:41:03 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 22:41:02 - root - INFO - --------------------------
+2024-08-09 22:41:03 - root - INFO - MongoDB connection established successfully.
+2024-08-09 22:41:03 - root - INFO - Using database: meteo_data
+2024-08-09 22:41:03 - root - INFO - Using collection: locations
+2024-08-09 22:41:03 - root - INFO - Found 2 locations.
+2024-08-09 22:41:03 - root - INFO - ---
+2024-08-09 22:41:03 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 22:41:03 - root - INFO - ---
+2024-08-09 22:41:03 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
+2024-08-09 23:41:02 - root - INFO - --------------------------
+2024-08-09 23:41:03 - root - INFO - MongoDB connection established successfully.
+2024-08-09 23:41:03 - root - INFO - Using database: meteo_data
+2024-08-09 23:41:03 - root - INFO - Using collection: locations
+2024-08-09 23:41:03 - root - INFO - Found 2 locations.
+2024-08-09 23:41:03 - root - INFO - ---
+2024-08-09 23:41:03 - root - INFO - Location (Cala Estreta: 1000000) was sampled: False
+2024-08-09 23:41:03 - root - INFO - ---
+2024-08-09 23:41:03 - root - INFO - Location (Es Trenc: 1000001) was sampled: False
