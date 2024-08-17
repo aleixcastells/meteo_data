@@ -12,6 +12,7 @@ from data_handler.group_updater import groupUpdater
 from helpers.age_check import ageCheck
 from helpers.logger import log
 from config import get_mongo_handler
+from api_handler.api_usage import ApiUsage
 
 
 def main():
@@ -19,13 +20,21 @@ def main():
     load_dotenv()
     log("info", f"--------------------------------------------------------------")
 
+    api_usage = ApiUsage()  # Create an instance of ApiUsage
+
+    # record a 0 increment call to reset the function when necessary
+    api_usage.record_call("stormglass", 0)
+    api_usage.record_call("openmeteo", 0)
+
     mongo_handler = get_mongo_handler()
     # update the groups that require it
     groups = mongo_handler.get_groups()
 
     for i, group in enumerate(groups):
 
-        if group["group_enabled"] and ageCheck(group["refresh_time_unix"], group["refresh_rate"]):
+        if group["group_enabled"] and ageCheck(
+            group["refresh_time_unix"], group["refresh_rate"]
+        ):
             log(
                 "info",
                 f"[{i+1}] Fetching data for group: {group['group_name']}",

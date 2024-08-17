@@ -56,7 +56,10 @@ class ApiUsage:
                             "api_calls_month": amount,
                             "current_month": current_month,
                             "api_calls_today": amount,
-                        }
+                        },
+                        "$inc": {
+                            "api_calls_ever": amount,
+                        },
                     },
                 )
             else:
@@ -71,7 +74,10 @@ class ApiUsage:
                             "$set": {
                                 "current_day": current_day,
                                 "api_calls_today": amount,  # Reset today's call count
-                            }
+                            },
+                            "$inc": {
+                                "api_calls_ever": amount,
+                            },
                         },
                     )
 
@@ -83,6 +89,7 @@ class ApiUsage:
                             "$inc": {
                                 "api_calls_today": amount,
                                 "api_calls_month": amount,
+                                "api_calls_ever": amount,
                             }
                         },
                     )
