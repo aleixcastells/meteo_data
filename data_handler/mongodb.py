@@ -65,13 +65,18 @@ class mongoHandler:
         log("info", f"Using collection: {self.groups_collection.name}")
 
         try:
-            groups_cursor = self.groups_collection.find()
+            # Filter groups to only include those where `group_enabled` is true
+            groups_cursor = self.groups_collection.find({"group_enabled": True})
             groups = list(groups_cursor)
+
             if not groups:
-                log("warning", "No groups found in the collection.")
+                log("warning", "No enabled groups found in the collection.")
+
             else:
-                log("info", f"Found {len(groups)} groups.")
+                log("info", f"Found {len(groups)} enabled groups.")
+
             return groups
+
         except Exception as e:
             log("error", f"An error occurred while fetching groups: {e}")
             return []

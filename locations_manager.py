@@ -23,7 +23,8 @@ locations = mongo_handler.get_locations()
 @app.route("/")
 def index():
     log("info", "Opened location input HTML page")
-    return render_template("location_input/index.html")
+    groups = mongo_handler.get_groups()  # Fetch the groups from MongoDB
+    return render_template("location_input/index.html", groups=groups)
 
 
 @app.route("/process_data", methods=["POST"])

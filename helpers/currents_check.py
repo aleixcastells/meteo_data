@@ -18,13 +18,13 @@ def currentCheck(saved_data):
         if data["hourly"]["ocean_current_velocity"][0] == None:
             log(
                 "info",
-                "NO DATA. No information about oceanic currents for this location.",
+                f"DATA ERROR. {saved_data['currents']['latitude']}, {saved_data['currents']['longitude']} has no ocean information.",
             )
             return False
         else:
             log(
                 "info",
-                "DATA FOUND. This location is suitable as an ocean data gathering point",
+                f"DATA FOUND. {saved_data['currents']['latitude']}, {saved_data['currents']['longitude']} is suitable as an ocean data gathering point",
             )
             return True
 

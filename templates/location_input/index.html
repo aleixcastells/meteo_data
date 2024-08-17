@@ -28,7 +28,12 @@
 
         <div class="form-row-no-button">
             <label for="location_group_input">Group:</label>
-            <input type="text" id="location_group_input" name="location_group_input">
+            <select id="location_group_input" name="location_group_input">
+                <option value="">- select group -</option>
+                {% for group in groups %}
+                <option value="{{ group['group_number'] }}">{{ group['group_name'] }}</option>
+                {% endfor %}
+            </select>
         </div>
 
         <label for="location_coordinates_input">Coordinates: (lat, long)</label>
