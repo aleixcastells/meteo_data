@@ -19,6 +19,10 @@ class StormGlass:
         self.bio_data = None  # This will hold the fetched data
         self.api_usage = ApiUsage()  # Create an instance of ApiUsage
 
+        # record a 0 increment call to reset the function when necessary
+        self.api_usage.record_call("stormglass", 0)
+        self.api_usage.record_call("openmeteo", 0)
+
         if not self.api_usage.limit_reached("stormglass", 1):
             self.fetch_api()  # Automatically fetch data when the object is created
 
