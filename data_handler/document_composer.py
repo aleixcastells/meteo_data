@@ -53,7 +53,7 @@ def documentComposer(request):
             "cloud_cover": open_meteo.get_h_cloud_cover(i),
             "wind_speed": open_meteo.get_h_wind_speed(i),
             "uv_index": open_meteo.get_h_uv_index(i),
-            "is_day": open_meteo.get_h_uv_index(i),
+            "is_day": open_meteo.get_h_is_day(i),
         }
 
     log("info", "Sample processed and cleaned")
