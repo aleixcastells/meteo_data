@@ -44,7 +44,7 @@ def main():
         # Print the values
         log(
             "info",
-            f"{group['group_name']} — Updated: {ageCheck(group['refresh_time_unix'], group['refresh_rate'])} — Refresh Rate: {group['refresh_rate']}h — Updated: {refresh_time_iso}",
+            f"{group['group_name']} — Updated: {ageCheck(group['refresh_time_unix'], group['refresh_rate'])} — Refresh Rate: {group['refresh_rate']}h — Updated: {group['refresh_time_iso']}",
         )
 
         if group["group_enabled"] and ageCheck(
