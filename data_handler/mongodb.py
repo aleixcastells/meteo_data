@@ -107,15 +107,16 @@ class mongoHandler:
     def updateLastRefeshTime(self, location_id):
         current_unix_time = int(time.time())  # Get current Unix timestamp
         spain_timezone = pytz.timezone("Europe/Madrid")
+        spain_time = datetime.fromtimestamp(
+            current_unix_time, tz=timezone.utc
+        ).astimezone(spain_timezone)
 
         self.locations_collection.update_one(
             {"location_id": location_id},
             {
                 "$set": {
                     "refresh_time_unix": current_unix_time,
-                    "refresh_time_iso": datetime.fromtimestamp(
-                        int(time.time()), tz=spain_timezone
-                    ),
+                    "refresh_time_iso": spain_time.isoformat(),
                     # "refresh_time_unix": 0,
                 }
             },
@@ -129,15 +130,16 @@ class mongoHandler:
     def update_group(self, group_id, request):
         current_unix_time = int(time.time())  # Get current Unix timestamp
         spain_timezone = pytz.timezone("Europe/Madrid")
+        spain_time = datetime.fromtimestamp(
+            current_unix_time, tz=timezone.utc
+        ).astimezone(spain_timezone)
 
         result = self.groups_collection.update_one(
             {"group_id": group_id},
             {
                 "$set": {
                     "refresh_time_unix": current_unix_time,
-                    "refresh_time_iso": datetime.fromtimestamp(
-                        int(time.time()), tz=spain_timezone
-                    ),
+                    "refresh_time_iso": spain_time.isoformat(),
                     "water": {
                         "water_surface_temperature": request["water_temperature"],
                         "water_salinity": request["water_salinity"],
@@ -161,6 +163,17 @@ class mongoHandler:
                 "info",
                 f"Updating...: {group_id}.",
             )
+
+    def zeroLastRefeshTime(self, location_id):
+
+        self.locations_collection.update_one(
+            {"location_id": location_id},
+            {
+                "$set": {
+                    "refresh_time_unix": 0,
+                }
+            },
+        )
 
     # Function to close the connection to Mongo
     def close(self):
