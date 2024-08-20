@@ -14,6 +14,7 @@ from api_handler.api_usage import ApiUsage
 
 class StormGlass:
     def __init__(self, request_info):
+        load_dotenv()
         self.request_info = request_info
         self.weather_data = None  # This will hold the fetched data
         self.bio_data = None  # This will hold the fetched data
@@ -29,7 +30,6 @@ class StormGlass:
         log("info", "Sample retrieved from API")
 
     def fetch_api(self):
-        load_dotenv()
         STORMGLASS_KEY_WEATHER = os.getenv("STORMGLASS_KEY_WEATHER")
         STORMGLASS_KEY_BIO = os.getenv("STORMGLASS_KEY_BIO")
 
@@ -89,7 +89,6 @@ class StormGlass:
             self.bio_data = None
 
     def get_water_temperature(self):
-
         return buildSamplesArray(self.weather_data["hours"], "waterTemperature")
 
     def get_water_salinity(self):
