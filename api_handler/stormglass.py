@@ -51,7 +51,6 @@ class StormGlass:
                 headers={"Authorization": STORMGLASS_KEY_WEATHER},
             )
             weather_response.raise_for_status()  # Raise an error for bad responses
-
             self.weather_data = weather_response.json()  # Store the response JSON
 
             bio_response = requests.get(
@@ -81,6 +80,7 @@ class StormGlass:
             bio_response.raise_for_status()  # Raise an error for bad responses
 
             self.bio_data = bio_response.json()  # Store the response JSON
+            self.bio_data["hours"] = self.bio_data["hours"][::-1]  # Reverse the order
             self.api_usage.record_call("stormglass", 1)
 
         except requests.exceptions.RequestException as e:
@@ -88,31 +88,56 @@ class StormGlass:
             self.weather_data = None
             self.bio_data = None
 
-    # Example method to get water temperature
     def get_water_temperature(self):
 
-        try:
-            # Extract the first available water temperature data point
-            water_surface_temperature = self.weather_data["hours"][0][
-                "waterTemperature"
-            ]["sg"]
-
-            return water_surface_temperature
-
-        except (KeyError, IndexError) as e:
-            log("error", f"Error extracting water temperature: {e}")
-            return None
-
-        # Example method to get water temperature
+        return buildSamplesArray(self.weather_data["hours"], "waterTemperature")
 
     def get_water_salinity(self):
+        return buildSamplesArray(self.bio_data["hours"], "salinity")
 
-        try:
-            # Extract the first available water temperature data point
-            water_salinity = self.bio_data["hours"][0]["salinity"]["sg"]
+    def get_water_chlorophyll(self):
+        return buildSamplesArray(self.bio_data["hours"], "chlorophyll")
 
-            return water_salinity
+    def get_iron(self):
+        return buildSamplesArray(self.bio_data["hours"], "iron")
 
-        except (KeyError, IndexError) as e:
-            log("error", f"Error extracting water salinity: {e}")
-            return None
+    def get_water_nitrate(self):
+        return buildSamplesArray(self.bio_data["hours"], "nitrate")
+
+    def get_water_oxygen(self):
+        return buildSamplesArray(self.bio_data["hours"], "oxygen")
+
+    def get_water_ph(self):
+        return buildSamplesArray(self.bio_data["hours"], "ph")
+
+    def get_water_phosphate(self):
+        return buildSamplesArray(self.bio_data["hours"], "phosphate")
+
+    def get_water_phytoplankton(self):
+        return buildSamplesArray(self.bio_data["hours"], "phyto")
+
+    def get_water_silicate(self):
+        return buildSamplesArray(self.bio_data["hours"], "silicate")
+
+    def get_stormglass_time(self):
+        return buildSamplesArray(self.bio_data["hours"], "time")
+
+
+def buildSamplesArray(source, sample_name):
+    try:
+        max_value = None
+
+        for sample in source:
+            if isinstance(sample[sample_name], dict) and "sg" in sample[sample_name]:
+                value = sample[sample_name]["sg"]
+            else:
+                value = sample[sample_name]
+
+            if max_value is None or value > max_value:
+                max_value = value  # Update max_value if the current value is greater
+
+        return max_value
+
+    except Exception as e:
+        log("error", f"{sample_name} could not be read: {e}")
+        return None

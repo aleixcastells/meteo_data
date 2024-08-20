@@ -31,10 +31,28 @@ def documentComposer(request):
             "sunlight": open_meteo.get_d_sunlight(),
             "precipitation_total": open_meteo.get_d_precipitation_total(),
             "wind_main_direction": open_meteo.get_d_wind_main_direction(),
-            "water_surface_temperature": request["location"]["group"][
+            "water_surface_temperature": request["location"]["group"]["water"][
                 "water_surface_temperature"
             ],
-            "water_salinity": request["location"]["group"]["water_salinity"],
+            "water_salinity": request["location"]["group"]["water"]["water_salinity"],
+            "bio": {
+                "water_chlorophyll": request["location"]["group"]["water"][
+                    "water_chlorophyll"
+                ],
+                "water_iron": request["location"]["group"]["water"]["water_iron"],
+                "water_nitrate": request["location"]["group"]["water"]["water_nitrate"],
+                "water_oxygen": request["location"]["group"]["water"]["water_oxygen"],
+                "water_ph": request["location"]["group"]["water"]["water_ph"],
+                "water_phosphate": request["location"]["group"]["water"][
+                    "water_phosphate"
+                ],
+                "water_phytoplankton": request["location"]["group"]["water"][
+                    "water_phytoplankton"
+                ],
+                "water_silicate": request["location"]["group"]["water"][
+                    "water_silicate"
+                ],
+            },
         },
         "hourly_data": {},
     }

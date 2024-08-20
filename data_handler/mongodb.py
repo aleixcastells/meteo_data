@@ -127,9 +127,19 @@ class mongoHandler:
             {"group_id": group_id},
             {
                 "$set": {
-                    "water_surface_temperature": request["water_temperature"],
-                    "water_salinity": request["water_salinity"],
-                    "refresh_time_unix": int(time.time()),
+                    "water": {
+                        "water_surface_temperature": request["water_temperature"],
+                        "water_salinity": request["water_salinity"],
+                        "water_chlorophyll": request["water_chlorophyll"],
+                        "water_iron": request["water_iron"],
+                        "water_nitrate": request["water_nitrate"],
+                        "water_oxygen": request["water_oxygen"],
+                        "water_ph": request["water_ph"],
+                        "water_phosphate": request["water_phosphate"],
+                        "water_phytoplankton": request["water_phytoplankton"],
+                        "water_silicate": request["water_silicate"],
+                        "stormglass_time": request["time"],
+                    }
                 }
             },
         )
