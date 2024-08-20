@@ -160,5 +160,5 @@ def mongoURI():
     # MongoDB connection details from environment variables
     MONGO_URI_USR = os.getenv("MONGO_URI_USR")
     MONGO_URI_PWD = os.getenv("MONGO_URI_PWD")
-    MONGO_URI = f"mongodb+srv://{MONGO_URI_USR}:{MONGO_URI_PWD}@cluster0.jdmwldh.mongodb.net/?retryWrites=true&w=majority&appName=cluster0"
+    MONGO_URI = f"mongodb+srv://{MONGO_URI_USR}:{MONGO_URI_PWD}@cluster0.jdmwldh.mongodb.net/meteo_data?retryWrites=true&w=majority&appName=cluster0"
     return MONGO_URI
