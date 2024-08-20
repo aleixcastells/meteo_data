@@ -161,5 +161,5 @@ def mongoURI():
     MONGO_URI_USR = os.getenv("MONGO_URI_USR")
     MONGO_URI_PWD = os.getenv("MONGO_URI_PWD")
     MONGO_URI_CLUSTER = os.getenv("MONGO_URI_CLUSTER")
-    MONGO_URI = f"mongodb+srv://{MONGO_URI_USR}:{MONGO_URI_PWD}@cluster0.jdmwldh.mongodb.net/?retryWrites=true&w=majority&appName={MONGO_URI_CLUSTER}"
+    MONGO_URI = f"mongodb+srv://{MONGO_URI_USR}:{MONGO_URI_PWD}@{MONGO_URI_CLUSTER}.jdmwldh.mongodb.net/?retryWrites=true&w=majority&appName={MONGO_URI_CLUSTER}"
     return MONGO_URI
