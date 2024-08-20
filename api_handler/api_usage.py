@@ -4,6 +4,8 @@
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from datetime import datetime
+from dotenv import load_dotenv
+
 
 # files
 from helpers.logger import log
@@ -15,6 +17,7 @@ class ApiUsage:
         self.client = MongoClient(mongoURI())
         self.db = self.client["meteo_data"]
         self.collection = self.db["api_usage"]
+        load_dotenv()
 
     def limit_reached(self, api_name, margin):
 
