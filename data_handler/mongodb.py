@@ -22,7 +22,9 @@ class mongoHandler:
         api_handler_collection_name,
     ):
         load_dotenv()
-
+        print(
+            f"Username: {os.getenv('MONGO_URI_USR')}, Password: {os.getenv('MONGO_URI_PWD')}"
+        )
         try:
             self.client = MongoClient(uri)
             self.client.admin.command("ping")  # Check if the server is available
@@ -157,6 +159,10 @@ class mongoHandler:
 
 
 def mongoURI():
+    load_dotenv()
+    print(
+        f"Username: {os.getenv('MONGO_URI_USR')}, Password: {os.getenv('MONGO_URI_PWD')}"
+    )
     # MongoDB connection details from environment variables
     MONGO_URI_USR = os.getenv("MONGO_URI_USR")
     MONGO_URI_PWD = os.getenv("MONGO_URI_PWD")
