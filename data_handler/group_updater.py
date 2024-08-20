@@ -38,11 +38,7 @@ def groupUpdater(request, group_id, group_name, mongo_handler):
         mongo_handler.update_group(group_id, update_request)
         log(
             "info",
-            f"Updated group '{group_name}' with water surface temperature: {update_request['water_temperature']}°C",
-        )
-        log(
-            "info",
-            f"Updated group '{group_name}' with water salinity: {update_request['water_salinity']}°C",
+            f"Updated group '{group_name}'. [wTemp: {update_request['water_temperature']}°C], [wSal: {update_request['water_salinity']}g/L] with water surface temperature: °C",
         )
 
         return {

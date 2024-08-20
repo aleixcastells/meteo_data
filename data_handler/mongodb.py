@@ -6,6 +6,7 @@ import time
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
+from datetime import datetime, timezone
 
 # files
 from helpers.logger import log
@@ -22,9 +23,6 @@ class mongoHandler:
         api_handler_collection_name,
     ):
         load_dotenv()
-        print(
-            f"Username: {os.getenv('MONGO_URI_USR')}, Password: {os.getenv('MONGO_URI_PWD')}"
-        )
         try:
             self.client = MongoClient(uri)
             self.client.admin.command("ping")  # Check if the server is available
@@ -53,7 +51,7 @@ class mongoHandler:
             if not locations:
                 log("warning", "No locations found in the collection.")
             else:
-                log("info", f"Found {len(locations)} locations.")
+                log("info", f"[Found {len(locations)} locations]")
 
             return locations
 
@@ -75,7 +73,7 @@ class mongoHandler:
                 log("warning", "No enabled groups found in the collection.")
 
             else:
-                log("info", f"Found {len(groups)} enabled groups.")
+                log("info", f"[Found {len(groups)} enabled groups]")
 
             return groups
 
@@ -129,6 +127,10 @@ class mongoHandler:
             {"group_id": group_id},
             {
                 "$set": {
+                    "refresh_time_unix": int(time.time()),
+                    "refresh_time_iso": datetime.fromtimestamp(
+                        int(time.time()), tz=timezone.utc
+                    ),
                     "water": {
                         "water_surface_temperature": request["water_temperature"],
                         "water_salinity": request["water_salinity"],
@@ -141,7 +143,7 @@ class mongoHandler:
                         "water_phytoplankton": request["water_phytoplankton"],
                         "water_silicate": request["water_silicate"],
                         "stormglass_time": request["time"],
-                    }
+                    },
                 }
             },
         )
@@ -150,7 +152,7 @@ class mongoHandler:
         else:
             log(
                 "info",
-                f"Updated water_surface_temperature for group_id: {group_id}. Updated water_surface_temperature for group_id: {group_id}.",
+                f"Updating...: {group_id}.",
             )
 
     # Function to close the connection to Mongo
@@ -160,9 +162,6 @@ class mongoHandler:
 
 def mongoURI():
     load_dotenv()
-    print(
-        f"Username: {os.getenv('MONGO_URI_USR')}, Password: {os.getenv('MONGO_URI_PWD')}"
-    )
     # MongoDB connection details from environment variables
     MONGO_URI_USR = os.getenv("MONGO_URI_USR")
     MONGO_URI_PWD = os.getenv("MONGO_URI_PWD")

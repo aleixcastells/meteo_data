@@ -2,6 +2,8 @@
 
 # dependencies
 from dotenv import load_dotenv
+from datetime import datetime, timezone
+
 
 # data handler
 from data_handler.mongodb import mongoHandler, mongoURI
@@ -31,6 +33,19 @@ def main():
     groups = mongo_handler.get_groups()
 
     for i, group in enumerate(groups):
+
+        # Assuming group["refresh_time_unix"] is a Unix timestamp (int)
+        refresh_time_unix = group["refresh_time_unix"]
+
+        # Convert the Unix timestamp to a timezone-aware datetime object
+        refresh_time_iso = datetime.fromtimestamp(refresh_time_unix, tz=timezone.utc)
+
+        log("info", ">>")
+        # Print the values
+        log(
+            "info",
+            f"{group['group_name']} — Updated: {ageCheck(group['refresh_time_unix'], group['refresh_rate'])} — Refresh Rate: {group['refresh_rate']}h — Updated: {refresh_time_iso}",
+        )
 
         if group["group_enabled"] and ageCheck(
             group["refresh_time_unix"], group["refresh_rate"]
