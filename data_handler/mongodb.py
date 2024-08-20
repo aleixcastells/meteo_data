@@ -116,7 +116,7 @@ class mongoHandler:
             {
                 "$set": {
                     "refresh_time_unix": current_unix_time,
-                    "refresh_time_iso": spain_time.isoformat(),
+                    "refresh_time_iso": spain_time,
                     # "refresh_time_unix": 0,
                 }
             },
@@ -139,7 +139,7 @@ class mongoHandler:
             {
                 "$set": {
                     "refresh_time_unix": current_unix_time,
-                    "refresh_time_iso": spain_time.isoformat(),
+                    "refresh_time_iso": spain_time,
                     "water": {
                         "water_surface_temperature": request["water_temperature"],
                         "water_salinity": request["water_salinity"],
