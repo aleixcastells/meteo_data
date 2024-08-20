@@ -111,6 +111,9 @@ class mongoHandler:
             {
                 "$set": {
                     "refresh_time_unix": current_unix_time,
+                    "refresh_time_iso": datetime.fromtimestamp(
+                        int(time.time()), tz=timezone.utc
+                    ),
                     # "refresh_time_unix": 0,
                 }
             },
