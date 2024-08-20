@@ -3,6 +3,7 @@
 # dependencies
 import os
 import time
+import pytz
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
@@ -105,6 +106,7 @@ class mongoHandler:
     # Function that changes the value of location["refresh_time_unix"] in the locations collection
     def updateLastRefeshTime(self, location_id):
         current_unix_time = int(time.time())  # Get current Unix timestamp
+        spain_timezone = pytz.timezone("Europe/Madrid")
 
         self.locations_collection.update_one(
             {"location_id": location_id},
@@ -112,7 +114,7 @@ class mongoHandler:
                 "$set": {
                     "refresh_time_unix": current_unix_time,
                     "refresh_time_iso": datetime.fromtimestamp(
-                        int(time.time()), tz=timezone.utc
+                        int(time.time()), tz=spain_timezone
                     ),
                     # "refresh_time_unix": 0,
                 }
@@ -125,14 +127,16 @@ class mongoHandler:
         log("info", "Location added to database")
 
     def update_group(self, group_id, request):
+        current_unix_time = int(time.time())  # Get current Unix timestamp
+        spain_timezone = pytz.timezone("Europe/Madrid")
 
         result = self.groups_collection.update_one(
             {"group_id": group_id},
             {
                 "$set": {
-                    "refresh_time_unix": int(time.time()),
+                    "refresh_time_unix": current_unix_time,
                     "refresh_time_iso": datetime.fromtimestamp(
-                        int(time.time()), tz=timezone.utc
+                        int(time.time()), tz=spain_timezone
                     ),
                     "water": {
                         "water_surface_temperature": request["water_temperature"],
