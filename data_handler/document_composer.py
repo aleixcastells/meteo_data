@@ -31,11 +31,13 @@ def documentComposer(request):
             "sunlight": open_meteo.get_d_sunlight(),
             "precipitation_total": open_meteo.get_d_precipitation_total(),
             "wind_main_direction": open_meteo.get_d_wind_main_direction(),
-            "water_surface_temperature": request["location"]["group"]["water"][
-                "water_surface_temperature"
-            ],
-            "water_salinity": request["location"]["group"]["water"]["water_salinity"],
-            "bio": {
+            "water": {
+                "water_surface_temperature": request["location"]["group"]["water"][
+                    "water_surface_temperature"
+                ],
+                "water_salinity": request["location"]["group"]["water"][
+                    "water_salinity"
+                ],
                 "water_chlorophyll": request["location"]["group"]["water"][
                     "water_chlorophyll"
                 ],
